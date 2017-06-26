@@ -6,5 +6,30 @@
     "default": 10,
     "max": 50
   },
-  "mongodb": "mongodb://localhost:27017/munin_api"
+  "mongodb": "mongodb://localhost:27017/munin_api",
+  "authentication": {
+    "secret": "79e019ec43ae5ba6256751bbf432a36c7aa939dedc2b838a61f98f538640f67433ed48c3bd6169f4f6536bd2afee0fa51615dbb28b6a7a6e19945c54af31a99458c558cf1ffb418b800170337c20cd2f108815e61fe7eea5771d0a44a96ac160f2e4658a5cb7992c698a5e7c8250c29752e124fad9550c775359991ccc0cb781cb6eaea9770fcff5b3e04762114f1dfc149534dd0f72adc3042d1d0dba9a135f4669261a3698d892addb93f5235ee38e869bb73659608e9d98a4001b03ee02e9d510dd7e7f7b5f147b2d3d89230f07eb574ec1b540d2a868115223c87eb7f51ac8b5e402a539a9a7c2ab9f4a78680e70d59b656f7cad6da5f709856a8175d50f",
+    "strategies": [
+      "jwt",
+      "local"
+    ],
+    "path": "/authentication",
+    "service": "users",
+    "jwt": {
+      "header": {
+        "type": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "subject": "anonymous",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "entity": "user",
+      "service": "users",
+      "usernameField": "email",
+      "passwordField": "password"
+    }
+  }
 }
