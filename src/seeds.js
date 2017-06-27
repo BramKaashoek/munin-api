@@ -10,46 +10,56 @@ const user1 = {
   password: 'asd123'
 }
 
-const user2 = {
-  name: 'jan henk',
-  email: 'jan@henk.com',
-  password: 'asd123'
-}
-
-const evaluation1 = {
-  color: 2
-}
-
-const evaluation2 = {
-  color: 1
-}
-
-const student1 = {
-  name: "Aad",
-  profilePicture: "http://res.cloudinary.com/dr9a28l84/image/upload/v1496598845/xobhxfqseawrhwforjbx.jpg",
-  evaluations: [evaluation1]
-}
-
-const batch1 = {
-  batchNumber: 1,
-  startDate: 2017-05-15,
-  endDate: 2017-07-07
-}
+const batches = [
+  {
+    batchNumber: 1,
+    startDate: 2017-05-15,
+    endDate: 2017-07-07,
+    students: [
+      {
+        name: "Aad",
+        profilePicture: "http://res.cloudinary.com/dr9a28l84/image/upload/v1496598845/xobhxfqseawrhwforjbx.jpg",
+        evaluations: [
+          {color: 2, date: 2017-05-15 },
+          {color: 1, date: 2017-05-16}
+        ]
+      },
+      {
+        name: "Tim",
+        profilePicture: "http://res.cloudinary.com/dr9a28l84/image/upload/v1496598845/xobhxfqseawrhwforjbx.jpg",
+        evaluations: [{color: 1, date: 2017-05-15}]
+      }
+    ]
+  }
+]
 
 const feathersClient = feathers();
 
 feathersClient
-  .configure(hooks())
-  .configure(rest('http://localhost:3030').superagent(superagent))
-  .configure(auth());
+.configure(hooks())
+.configure(rest('http://localhost:3030').superagent(superagent))
+.configure(auth());
 
-  feathersClient.service('users').create(user1)
-  .then()
-  .catch(function(error) {
-    console.error('Error creating user!', error.message);
+feathersClient.service('users').create(user1)
+.then(() => {
+  feathersClient.authenticate({
+    strategy: 'local',
+    email: user1.email,
+    password: user1.password
+  })
+  .then(() => {
+    batches.map((batch) => {
+      feathersClient.service('batches').create(batch)
+        .then()
+        .catch((error) => {
+          console.error("error creating batches", error.message);
+        });
+    })
+  })
+  .catch(function(error){
+    console.error('Error authenticating!', error.message);
   });
-
-  feathersClient.service('batches').create(evaluation1);
-  feathersClient.service('batches').create(evaluation2);
-  feathersClient.service('batches').create(student1);
-  feathersClient.service('batches').create(batch1);
+})
+.catch(function(error) {
+  console.error("creating user error", error.message);
+});
