@@ -13,21 +13,56 @@ const user1 = {
 const batches = [
   {
     batchNumber: 1,
-    startDate: 2017-05-15,
-    endDate: 2017-07-07,
+    startDate: new Date('2017-05-15T12:00:00'),
+    endDate: new Date('2017-07-07T12:00:00'),
     students: [
       {
         name: "Aad",
         profilePicture: "http://res.cloudinary.com/dr9a28l84/image/upload/v1496598845/xobhxfqseawrhwforjbx.jpg",
         evaluations: [
-          {color: 2, date: 2017-05-15 },
-          {color: 1, date: 2017-05-16}
+          {color: 2, date: new Date('2017-05-15T12:00:00') },
+          {color: 1, date: new Date('2017-05-16T12:00:00') }
         ]
       },
       {
         name: "Tim",
         profilePicture: "http://res.cloudinary.com/dr9a28l84/image/upload/v1496598845/xobhxfqseawrhwforjbx.jpg",
-        evaluations: [{color: 1, date: 2017-05-15}]
+        evaluations: [{color: 1, date: new Date('2017-05-15T12:00:00')}]
+      }
+    ]
+  },
+  {
+    batchNumber: 2,
+    startDate: new Date('2017-05-30T12:00:00') ,
+    endDate: new Date('2017-07-21T12:00:00'),
+    students: [
+      {
+        name: "Jan Jansen",
+        profilePicture: "http://res.cloudinary.com/dr9a28l84/image/upload/v1496598845/xobhxfqseawrhwforjbx.jpg",
+        evaluations: [
+          {color: 2, date: new Date('2017-05-30T12:00:00') },
+          {color: 1, date: new Date('2017-06-01T12:00:00') }
+        ]
+      },
+      {
+        name: "Bang Olafson",
+        profilePicture: "http://res.cloudinary.com/dr9a28l84/image/upload/v1496598845/xobhxfqseawrhwforjbx.jpg",
+        evaluations: [{color: 1, date: new Date('2017-05-30T12:00:00')}]
+      },
+      {
+        name: "Daan Daansen",
+        profilePicture: "http://res.cloudinary.com/dr9a28l84/image/upload/v1496598845/xobhxfqseawrhwforjbx.jpg",
+        evaluations: [
+          {color: 2, date: new Date('2017-05-30T12:00:00') },
+          {color: 2, date: new Date('2017-06-01T12:00:00') }
+        ]
+      },{
+        name: "Sucky mcSuckcson Von Suckenstein de derde",
+        profilePicture: "http://res.cloudinary.com/dr9a28l84/image/upload/v1496598845/xobhxfqseawrhwforjbx.jpg",
+        evaluations: [
+          {color: 0, date: new Date('2017-05-30T12:00:00') },
+          {color: 0, date: new Date('2017-06-01T12:00:00') }
+        ]
       }
     ]
   }
