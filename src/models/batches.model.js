@@ -23,7 +23,7 @@ module.exports = function (app) {
   });
 
   const batches = new Schema({
-    batchNumber: { type: Number, required: true },
+    batchNumber: { type: Number, required: true, unique: true },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
     students: [studentsSchema],
