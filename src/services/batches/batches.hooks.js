@@ -7,14 +7,17 @@ const restrict = [
 ]
 
 
+const saveEvaluation = require('../../hooks/save-evaluation');
+
+
 module.exports = {
   before: {
     all: [ ...restrict ],
     find: [],
     get: [],
     create: [],
-    update: [],
-    patch: [],
+    update: [saveEvaluation()],
+    patch: [saveEvaluation()],
     remove: []
   },
 
