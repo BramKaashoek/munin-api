@@ -13,14 +13,17 @@ const saveEvaluation = require('../../hooks/save-evaluation');
 const createBatch = require('../../hooks/create-batch');
 
 
+const deleteStudent = require('../../hooks/delete-student');
+
+
 module.exports = {
   before: {
     all: [ ...restrict ],
     find: [],
     get: [],
     create: [createBatch()],
-    update: [saveEvaluation()],
-    patch: [saveEvaluation()],
+    update: [saveEvaluation(), deleteStudent()],
+    patch: [saveEvaluation(), deleteStudent()],
     remove: []
   },
 
