@@ -10,12 +10,15 @@ const restrict = [
 const saveEvaluation = require('../../hooks/save-evaluation');
 
 
+const createBatch = require('../../hooks/create-batch');
+
+
 module.exports = {
   before: {
     all: [ ...restrict ],
     find: [],
     get: [],
-    create: [],
+    create: [createBatch()],
     update: [saveEvaluation()],
     patch: [saveEvaluation()],
     remove: []

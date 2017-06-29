@@ -3,7 +3,7 @@
 
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
   return function (hook) {
-    if (hook.data.evaluation === undefined) return Promise.resolve(hook)
+    if ( hook.data.newEvaluation === undefined) return Promise.resolve(hook)
 
     return hook.app.service('batches').get(hook.data.evaluation.batchId).then((batch) =>{
       const {
