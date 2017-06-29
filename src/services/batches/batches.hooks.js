@@ -19,14 +19,17 @@ const deleteStudent = require('../../hooks/delete-student');
 const createStudent = require('../../hooks/create-student');
 
 
+const editStudent = require('../../hooks/edit-student');
+
+
 module.exports = {
   before: {
     all: [ ...restrict ],
     find: [],
     get: [],
     create: [createBatch()],
-    update: [saveEvaluation(), deleteStudent(), createStudent()],
-    patch: [saveEvaluation(), deleteStudent(), createStudent()],
+    update: [saveEvaluation(), deleteStudent(), createStudent(), editStudent()],
+    patch: [saveEvaluation(), deleteStudent(), createStudent(), editStudent()],
     remove: []
   },
 
