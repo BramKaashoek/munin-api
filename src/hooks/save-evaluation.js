@@ -1,5 +1,6 @@
 // Use this hook to manipulate incoming or outgoing data.
 // For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
+const moment = require('moment')
 
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
   return function (hook) {
@@ -15,9 +16,19 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
       } = hook.data.evaluation
 
 
-      studentIndex = batch.students.indexOf(batch.students.filter((s) => {return s._id.toString() === _id.toString()})[0])
-      studentEvaluations = batch.students[studentIndex].evaluations.concat({ color: color, date: date, remarks: remarks })
-      batch.students[studentIndex].evaluations = studentEvaluations
+      const studentIndex = batch.students.indexOf(batch.students.filter((s) => {return s._id.toString() === _id.toString()})[0])
+
+      const studentEvaluations = batch.students[studentIndex].evaluations
+      const existing = studentEvaluations.find((e) => {
+        return moment(e.date).format('DD/MM/YYYY') === moment(date).format('DD/MM/YYYY')
+      })
+
+      if (existing === undefined){
+        batch.students[studentIndex].evaluations = studentEvaluations.concat({ color: color, date: date, remarks: remarks })
+      } else {
+
+        batch.students[studentIndex].evaluations[studentEvaluations.indexOf(existing)] = {remarks: remarks, color: color, date: date}
+      }
       hook.data = batch
      })
 
